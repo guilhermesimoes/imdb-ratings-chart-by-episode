@@ -8,6 +8,8 @@ var heightMargin = 20, /* This is needed because of browsers' margins and paddin
     chartHeight = height - chartBottomPadding - xAxisHeight,
     linePadding = 1; /* https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-ordinal_rangePoints */
 
+var lineAnimationDuration = 2000;
+
 // scales
 var x = d3.scale.ordinal()
     .rangePoints([0, chartWidth], linePadding);
@@ -56,7 +58,17 @@ svg.append("g")
         .style("text-anchor", "end")
         .text("Average Rating");
 
-lineContainer.append("path")
+path = lineContainer.append("path")
     .datum(episodes)
     .attr("class", "line")
     .attr("d", line);
+
+var totalLength = path.node().getTotalLength();
+
+path
+    .attr("stroke-dasharray", totalLength + " " + totalLength)
+    .attr("stroke-dashoffset", totalLength)
+    .transition()
+        .duration(lineAnimationDuration)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
