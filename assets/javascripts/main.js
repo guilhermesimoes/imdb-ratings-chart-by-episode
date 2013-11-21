@@ -9,8 +9,8 @@ var container = document.getElementById("js-content"),
     chartHeight = height - chartTopPadding - chartBottomPadding - xAxisHeight,
     linePadding = 1; /* https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-ordinal_rangePoints */
 
-var delay = 100,
-    lineAnimationDuration = delay * episodes.length,
+var lineAnimationDuration = 2500,
+    delay = lineAnimationDuration / episodes.length,
     labelFadeDuration = 1000;
 
 var animationDelay = function(d, i) {
