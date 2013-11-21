@@ -2,7 +2,7 @@ var heightMargin = 20, /* This is needed because of browsers' margins and paddin
     width = document.body.offsetWidth,
     height = window.innerHeight - heightMargin,
     yAxisWidth = 30,
-    xAxisHeight = 30,
+    xAxisHeight = 40,
     chartBottomPadding = 10,
     chartWidth = width - yAxisWidth,
     chartHeight = height - chartBottomPadding - xAxisHeight,
@@ -44,8 +44,13 @@ var lineContainer = svg.append("g")
 
 svg.append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(" + yAxisWidth + "," + (chartHeight + chartBottomPadding) + ")")
-    .call(xAxis);
+    .attr("transform", "translate(" + yAxisWidth + "," + (height - xAxisHeight) + ")")
+    .call(xAxis)
+    .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.5em")
+        .attr("dy", ".55em")
+        .attr("transform", "rotate(-45)");
 
 svg.append("g")
     .attr("class", "y axis")
