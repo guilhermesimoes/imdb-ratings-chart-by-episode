@@ -40,9 +40,11 @@ var nodeGroupPos = function(d) {
 // accessor functions
 var nodeValues = function(d) { return d.rating; }
 
-ids = episodes.map(function(d){ return d.id; });
+var maxRating = 10,
+    ids = episodes.map(function(d){ return d.id; });
+
 x.domain(ids);
-y.domain(d3.extent(episodes, function(d) { return d.rating; }));
+y.domain([d3.min(episodes, function(d) { return d.rating; }), maxRating]);
 
 var line = d3.svg.line()
     .x(xPos)
