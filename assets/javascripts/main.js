@@ -1,6 +1,6 @@
-var heightMargin = 20, /* This is needed because of browsers' margins and padding and whatnot */
-    width = document.body.offsetWidth,
-    height = window.innerHeight - heightMargin,
+var container = document.getElementById("js-content"),
+    width = container.clientWidth,
+    height = container.clientHeight,
     yAxisWidth = 30,
     xAxisHeight = 40,
     chartTopPadding = 20,
@@ -48,7 +48,7 @@ var line = d3.svg.line()
     .x(xPos)
     .y(yPos);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(container).append("svg")
     .attr("width", width)
     .attr("height", height);
 
