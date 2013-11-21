@@ -3,12 +3,19 @@ var heightMargin = 20, /* This is needed because of browsers' margins and paddin
     height = window.innerHeight - heightMargin,
     yAxisWidth = 30,
     xAxisHeight = 40,
+    chartTopPadding = 20,
     chartBottomPadding = 10,
     chartWidth = width - yAxisWidth,
-    chartHeight = height - chartBottomPadding - xAxisHeight,
+    chartHeight = height - chartTopPadding - chartBottomPadding - xAxisHeight,
     linePadding = 1; /* https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-ordinal_rangePoints */
 
-var lineAnimationDuration = 2000;
+var delay = 100,
+    lineAnimationDuration = delay * episodes.length,
+    labelFadeDuration = 1000;
+
+var animationDelay = function(d, i) {
+    return i * delay;
+};
 
 // scales
 var x = d3.scale.ordinal()
@@ -26,6 +33,12 @@ var yAxis = d3.svg.axis()
 
 var xPos = function(d) { return x(d.id); };
 var yPos = function(d) { return y(d.rating); };
+var nodeGroupPos = function(d) {
+    return "translate(" + xPos(d) + "," + yPos(d) + ")";
+};
+
+// accessor functions
+var nodeValues = function(d) { return d.rating; }
 
 ids = episodes.map(function(d){ return d.id; });
 x.domain(ids);
@@ -40,7 +53,30 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 var lineContainer = svg.append("g")
-    .attr("transform", "translate(" + yAxisWidth + ",0)");
+    .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")");
+
+nodes = lineContainer.selectAll("g")
+    .data(episodes)
+    .enter().append("g")
+    .attr("transform", nodeGroupPos);
+
+nodes.append("circle")
+    .attr("r", 0)
+    .attr("class", "node")
+    .transition()
+        .delay(animationDelay)
+        .attr("r", 6);
+
+nodes.append("text")
+    .attr("x", -24)
+    .attr("y", -10)
+    .text(nodeValues)
+    .attr("class", "node-label")
+    .attr("opacity", 0)
+    .transition()
+        .delay(lineAnimationDuration)
+        .duration(labelFadeDuration)
+        .attr("opacity", 1);
 
 svg.append("g")
     .attr("class", "x axis")
@@ -54,7 +90,7 @@ svg.append("g")
 
 svg.append("g")
     .attr("class", "y axis")
-    .attr("transform", "translate(" + yAxisWidth + ",0)")
+    .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")")
     .call(yAxis)
     .append("text")
         .attr("transform", "rotate(-90)")
