@@ -54,8 +54,44 @@ var svg = d3.select(container).append("svg")
     .attr("width", width)
     .attr("height", height);
 
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(" + yAxisWidth + "," + (height - xAxisHeight) + ")")
+    .call(xAxis)
+    .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.5em")
+        .attr("dy", ".55em")
+        .attr("transform", "rotate(-45)");
+
+svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")")
+    .call(yAxis)
+    .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Average Rating");
+
 var lineContainer = svg.append("g")
     .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")");
+
+path = lineContainer.append("path")
+    .datum(episodes)
+    .attr("class", "line")
+    .attr("d", line);
+
+var totalLength = path.node().getTotalLength();
+
+path
+    .attr("stroke-dasharray", totalLength + " " + totalLength)
+    .attr("stroke-dashoffset", totalLength)
+    .transition()
+        .duration(lineAnimationDuration)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
 
 nodes = lineContainer.selectAll("g")
     .data(episodes)
@@ -79,39 +115,3 @@ nodes.append("text")
         .delay(lineAnimationDuration)
         .duration(labelFadeDuration)
         .attr("opacity", 1);
-
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(" + yAxisWidth + "," + (height - xAxisHeight) + ")")
-    .call(xAxis)
-    .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.5em")
-        .attr("dy", ".55em")
-        .attr("transform", "rotate(-45)");
-
-svg.append("g")
-    .attr("class", "y axis")
-    .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")")
-    .call(yAxis)
-    .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Average Rating");
-
-path = lineContainer.append("path")
-    .datum(episodes)
-    .attr("class", "line")
-    .attr("d", line);
-
-var totalLength = path.node().getTotalLength();
-
-path
-    .attr("stroke-dasharray", totalLength + " " + totalLength)
-    .attr("stroke-dashoffset", totalLength)
-    .transition()
-        .duration(lineAnimationDuration)
-        .ease("linear")
-        .attr("stroke-dashoffset", 0);
