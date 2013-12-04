@@ -33,6 +33,13 @@ body {
   stroke-width: 3px;
 }
 
+.y-axis-label,
+.y-point-label,
+.x-point-label {
+  font-size: 10px;
+}
+
+
 .node {
   fill: steelblue;
 }

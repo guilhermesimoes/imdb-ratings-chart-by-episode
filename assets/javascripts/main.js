@@ -59,21 +59,27 @@ svg.append("g")
     .attr("transform", "translate(" + yAxisWidth + "," + (height - xAxisHeight) + ")")
     .call(xAxis)
     .selectAll("text")
+        .attr("class", "x-point-label")
         .style("text-anchor", "end")
         .attr("dx", "-.5em")
         .attr("dy", ".55em")
         .attr("transform", "rotate(-45)");
 
-svg.append("g")
+var axis = svg.append("g")
     .attr("class", "y axis")
     .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")")
-    .call(yAxis)
-    .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Average Rating");
+    .call(yAxis);
+
+axis.selectAll("text")
+    .attr("class", "y-point-label");
+
+axis.append("text")
+    .attr("class", "y-axis-label")
+    .style("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .attr("transform", "rotate(-90)")
+    .text("Average Rating");
 
 var lineContainer = svg.append("g")
     .attr("transform", "translate(" + yAxisWidth + "," + chartTopPadding + ")");
