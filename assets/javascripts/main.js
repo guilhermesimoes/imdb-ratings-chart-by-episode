@@ -76,8 +76,7 @@ axis.selectAll("text")
 axis.append("text")
     .attr("class", "y-axis-label")
     .style("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".71em")
+    .attr("y", "1.5em")
     .attr("transform", "rotate(-90)")
     .text("Average Rating");
 
@@ -125,8 +124,8 @@ nodes.append("circle")
         .attr("r", 7);
 
 nodes.append("text")
-    .attr("x", -24)
-    .attr("y", -10)
+    .attr("x", "-1.7em")
+    .attr("y", "-0.7em")
     .text(nodeValues)
     .attr("class", "node-label")
     .attr("opacity", 0)
