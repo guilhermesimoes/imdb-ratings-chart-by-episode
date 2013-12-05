@@ -1,3 +1,9 @@
+var baseUrl = "http://www.imdb.com";
+
+var show = {
+  name: "Game of Thrones"
+};
+
 var episodes = [
   {
     id: "S1E1",
@@ -179,4 +185,4 @@ var episodes = [
     name: "Mhysa",
     url: "/title/tt2178796/"
   }
-]
+];

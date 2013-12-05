@@ -20,10 +20,23 @@
 
         <div id="js-content" class="content"></div>
 
+        <div id="js-description-container" class="episode-description"></div>
+        <script id="js-description-template" type="text/template">
+            <header>
+                <h2 class="show-title">{{show.name}}:</h2>
+                <p class="episode-number">{{episode.id}}</p>
+            </header>
+            <span class="episode-name">
+                <a href="{{episode.url}}" class="episode-link" target="_blank" title="Open this episode's IMDb page in a new tab">{{episode.name}}</a>
+                <hr class="line-separator">
+            </span>
+        </script>
+
         <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script> -->
 
         <script src="assets/javascripts/d3-3.3.10.min.js"></script>
+        <script src="assets/javascripts/mustache-0.8.0.js"></script>
         <script src="assets/javascripts/data.js"></script>
         <script src="assets/javascripts/main.js"></script>
     </body>

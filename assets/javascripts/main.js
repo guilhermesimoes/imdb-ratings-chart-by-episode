@@ -104,12 +104,25 @@ nodes = lineContainer.selectAll("g")
     .enter().append("g")
     .attr("transform", nodeGroupPos);
 
+var descriptionContainer = document.getElementById("js-description-container");
+
+var descriptionTemplate = document.getElementById("js-description-template").innerHTML;
+
+var showEpisodeDescription = function() {
+    var view = {
+        show: show,
+        episode: this.parentNode.__data__
+    }
+    descriptionContainer.innerHTML = Mustache.render(descriptionTemplate, view);
+};
+
 nodes.append("circle")
-    .attr("r", 0)
     .attr("class", "node")
+    .attr("r", 0)
+    .on("mouseover", showEpisodeDescription)
     .transition()
         .delay(animationDelay)
-        .attr("r", 6);
+        .attr("r", 7);
 
 nodes.append("text")
     .attr("x", -24)

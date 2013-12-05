@@ -3,17 +3,56 @@ html {
 }
 
 body {
+  position: relative;
+  height: 100%;
   margin: 0;
   padding: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  height: 100%;
-  font: 10px sans-serif;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif
 }
 
 .content {
   height: 100%;
+}
+
+.episode-description {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  margin: 20px 0 0 80px;
+  text-shadow: 0px 0px 20px #FFF;
+  background: -webkit-radial-gradient(center,ellipse cover,rgba(255,255,255,1) 0,rgba(255,255,255,0) 100%);
+  background: radial-gradient(center,ellipse cover,rgba(255,255,255,1) 0,rgba(255,255,255,0) 100%);
+}
+
+.episode-description .show-title {
+  display: inline-block;
+  margin: 0 0 6px 0;
+}
+
+.episode-description .episode-number {
+  display: inline;
+  font-size: 20px;
+}
+
+.episode-description .episode-name {
+  display: inline-block;
+  margin: 0;
+  font-size: 40px;
+}
+
+.episode-description .episode-link {
+  text-decoration: none;
+  color: black;
+}
+
+.episode-description .line-separator {
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background-color: grey;
 }
 
 .axis path,
