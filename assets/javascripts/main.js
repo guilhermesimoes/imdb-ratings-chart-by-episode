@@ -98,7 +98,7 @@ path
         .ease("linear")
         .attr("stroke-dashoffset", 0);
 
-nodes = lineContainer.selectAll("g")
+nodeContainers = lineContainer.selectAll("g")
     .data(episodes)
     .enter().append("g")
     .attr("transform", nodeGroupPos);
@@ -108,6 +108,9 @@ var descriptionContainer = document.getElementById("js-description-container");
 var descriptionTemplate = document.getElementById("js-description-template").innerHTML;
 
 var showEpisodeDescription = function() {
+    nodes.classed("selected-node", false);
+    d3.select(this).classed("selected-node", true);
+
     var view = {
         show: show,
         episode: this.parentNode.__data__
@@ -115,19 +118,20 @@ var showEpisodeDescription = function() {
     descriptionContainer.innerHTML = Mustache.render(descriptionTemplate, view);
 };
 
-nodes.append("circle")
+var nodes = nodeContainers.append("circle")
     .attr("class", "node")
     .attr("r", 0)
-    .on("mouseover", showEpisodeDescription)
-    .transition()
+    .on("mouseover", showEpisodeDescription);
+
+nodes.transition()
         .delay(animationDelay)
         .attr("r", 7);
 
-nodes.append("text")
+nodeContainers.append("text")
+    .attr("class", "node-label")
     .attr("x", "-1.7em")
     .attr("y", "-0.7em")
     .text(nodeValues)
-    .attr("class", "node-label")
     .attr("opacity", 0)
     .transition()
         .delay(lineAnimationDuration)
