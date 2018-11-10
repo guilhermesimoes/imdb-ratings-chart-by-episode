@@ -62,9 +62,9 @@ svg.append("g")
     .selectAll("text")
         .attr("class", "x-point-label")
         .style("text-anchor", "end")
-        .attr("dx", "-.5em")
-        .attr("dy", ".55em")
-        .attr("transform", "rotate(-45)");
+        .attr("dx", "-1em")
+        .attr("dy", "-0.5em")
+        .attr("transform", "rotate(-90)");
 
 var axis = svg.append("g")
     .attr("class", "y axis")
