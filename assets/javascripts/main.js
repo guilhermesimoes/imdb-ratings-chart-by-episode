@@ -3,7 +3,7 @@ var container = document.getElementById("js-content"),
     height = container.clientHeight,
     yAxisWidth = 30,
     xAxisHeight = 40,
-    chartTopPadding = 20,
+    chartTopPadding = 40,
     chartBottomPadding = 10,
     chartWidth = width - yAxisWidth,
     chartHeight = height - chartTopPadding - chartBottomPadding - xAxisHeight,
@@ -40,11 +40,12 @@ var nodeGroupPos = function(d) {
 // accessor functions
 var nodeValues = function(d) { return d.rating; }
 
-var maxRating = 10,
+var minRating = 7.5, // d3.min(episodes, function(d) { return d.rating; })
+    maxRating = 10,
     ids = episodes.map(function(d){ return d.id; });
 
 x.domain(ids);
-y.domain([d3.min(episodes, function(d) { return d.rating; }), maxRating]);
+y.domain([minRating, maxRating]);
 
 var line = d3.svg.line()
     .x(xPos)
