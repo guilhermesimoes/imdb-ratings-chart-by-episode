@@ -112,6 +112,7 @@ var showEpisodeDescription = function() {
     d3.select(this).classed("selected-node", true);
 
     var view = {
+        baseUrl: baseUrl,
         show: show,
         episode: this.parentNode.__data__
     }

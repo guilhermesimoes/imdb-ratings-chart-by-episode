@@ -1,4 +1,4 @@
-var baseUrl = "http://www.imdb.com";
+var baseUrl = "https://www.imdb.com";
 
 var show = {
   name: "Game of Thrones"
